@@ -16,6 +16,21 @@ class AppButtons {
         child: AppIconWidgets.svgAssetIcon(iconPath: iconPath, size: size, color: color));
   }
 
+  static Widget svgIconButtonWithText ({double? size, bool isIconAtRight = false, required String text, VoidCallback? onTap, required String iconPath, Color? color}){
+    return GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            !isIconAtRight ? AppIconWidgets.svgAssetIcon(iconPath: iconPath, size: size, color: color) : const SizedBox.shrink(),
+            !isIconAtRight ? 6.horizontalSpace : 0.horizontalSpace,
+            AppTexts.mediumText(text: text, color: color),
+            isIconAtRight ? 6.horizontalSpace : 0.horizontalSpace,
+            isIconAtRight ? AppIconWidgets.svgAssetIcon(iconPath: iconPath, size: size, color: color) : const SizedBox.shrink(),
+
+          ],
+        ));
+  }
+
   static Widget textButton ({required String text, double? fontSize, FontWeight? fontWeight, VoidCallback? onTap, Color? color}){
     return GestureDetector(onTap: onTap,child: AppTexts.smallText(text: text, fontSize: fontSize, fontWeight: fontWeight, color: color ?? AppColors.primaryColor));
   }

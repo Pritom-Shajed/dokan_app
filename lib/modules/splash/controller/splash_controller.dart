@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dokan_app/routes/pages/app_pages.dart';
 import 'package:dokan_app/storage/storage.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,7 @@ class SplashController extends GetxController {
     Future.delayed(const Duration(milliseconds: 1500)).whenComplete(() {
       final isUserLoggedIn = Get.find<StorageController>().isUserLoggedIn();
       if(isUserLoggedIn){
-        Get.offAllNamed(Routes.SIGN_IN);
+        Get.offAllNamed(Routes.HOME);
       } else {
         Get.offAllNamed(Routes.SIGN_IN);
       }
