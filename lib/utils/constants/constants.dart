@@ -5,3 +5,4 @@ export 'app_fonts/app_fonts.dart';
 export 'api_endpoints/api_endpoints.dart';
 export 'app_icons/app_icons.dart';
 export 'storage_constants/storage_constants.dart';
+export 'regex/app_regex.dart';
