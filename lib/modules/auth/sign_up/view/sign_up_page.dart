@@ -1,4 +1,5 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/helper/helper.dart';
 import 'package:dokan_app/modules/auth/auth.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,8 +69,6 @@ class SignUpPage extends StatelessWidget {
                     validator: (pass){
                       if(pass == null || pass.isEmpty){
                         return Strings.emptyTextField;
-                      } else if(!AppRegex.isPassValid(pass)){
-                        return Strings.passNotValid;
                       }
                       return null;
                     },
@@ -98,7 +97,17 @@ class SignUpPage extends StatelessWidget {
                     isSignInPage: false,
                     onTapLoginOrSignUp: (){
                       if(controller.formKey.currentState!.validate()){
-
+                        context.showLoaderOverlay;
+                        controller.signUp().then((response){
+                          if(response.isSuccess){
+                            context.hideLoaderOverlay;
+                            AppToasts.longToast(response.message);
+                            Get.back();
+                          } else {
+                            context.hideLoaderOverlay;
+                            AppToasts.longToast(response.message);
+                          }
+                        });
                       }
                     },
                     navigateToSignIn: () => Get.back())

@@ -1,5 +1,7 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/helper/extensions/build_context_extensions.dart';
 import 'package:dokan_app/modules/auth/auth.dart';
+import 'package:dokan_app/modules/home/view/home_page.dart';
 import 'package:dokan_app/routes/pages/app_pages.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:dokan_app/utils/constants/regex/app_regex.dart';
@@ -59,8 +61,6 @@ class SignInPage extends StatelessWidget {
                       validator: (pass){
                         if(pass == null || pass.isEmpty){
                           return Strings.emptyTextField;
-                        } else if(!AppRegex.isPassValid(pass)){
-                          return Strings.passNotValid;
                         }
                         return null;
                       },
@@ -69,7 +69,7 @@ class SignInPage extends StatelessWidget {
                 24.verticalSpace,
                 Align(
                     alignment: Alignment.centerRight,
-                    child: AppButtons.textButton(text: 'Forget password?', color: AppColors.extraLightFontColor)),
+                    child: AppButtons.textButton(onTap: ()=> AppToasts.shortToast(Strings.comingSoon),text: 'Forget password?', color: AppColors.extraLightFontColor)),
 
                 52.verticalSpace,
 
@@ -77,10 +77,20 @@ class SignInPage extends StatelessWidget {
                     isSignInPage: true,
                     onTapLoginOrSignUp: (){
                       if(controller.formKey.currentState!.validate()){
-
+                        context.showLoaderOverlay;
+                        controller.signIn().then((response){
+                          if(response.isSuccess){
+                            context.hideLoaderOverlay;
+                            AppToasts.longToast(response.message);
+                            Get.to(() => HomePage());
+                          } else {
+                            context.hideLoaderOverlay;
+                            AppToasts.longToast(response.message);
+                          }
+                        });
                       }
                     },
-                    navigateToSignUp: () => Get.toNamed(Routes.SIGN_UP))
+                    navigateToSignUp: () => Get.offAllNamed(Routes.HOME))
               ],
             ),
           ),

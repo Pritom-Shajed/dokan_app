@@ -8,4 +8,7 @@ class Routes {
   ///AUTH
   static const SIGN_IN = '/sign-in';
   static const SIGN_UP = '/sign-up';
+
+  ///HOME
+  static const HOME = '/home';
 }

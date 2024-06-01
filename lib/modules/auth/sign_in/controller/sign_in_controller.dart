@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dokan_app/models/models.dart';
 import 'package:dokan_app/modules/auth/auth.dart';
+import 'package:dokan_app/network/api/api.dart';
+import 'package:dokan_app/storage/controller/storage_controller.dart';
+import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +41,34 @@ class SignInController extends GetxController {
     emailController.dispose();
     passController.dispose();
     super.onClose();
+  }
+
+
+  ///API CALLS
+
+  Future<ResponseModel> signIn () async{
+    try {
+      final response = await _signInRepo.signIn(body: {
+        "username": emailController.text.trim(),
+        "password": passController.text.trim()
+      });
+
+
+      final apiResponseHandler = ApiResponseHandler(
+        response, successCallback: (response) {
+
+         var responseBody = json.decode(response.body);
+
+         Get.find<StorageController>().saveUserToken(token: responseBody['token']);
+
+        return ResponseModel(true, Strings.welcome);
+      },
+      );
+
+      return apiResponseHandler.handleResponse();
+    } catch (e){
+      return ResponseModel(false, e.toString());
+    }
   }
 
 }

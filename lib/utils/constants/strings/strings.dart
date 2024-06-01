@@ -1,17 +1,18 @@
 abstract class Strings {
 
   static const String appName = 'Dokan';
-  static const String unknownError = 'Unknown Error! Try again after sometime.';
-
+  static const String welcome = 'Welcome to Dokan!';
+  static const String comingSoon = 'Coming Soon!';
   static const String loading = "Loading, please wait";
 
+  static const String unknownError = 'Unknown Error! Try again after sometime.';
   static const String noInternet = "No Internet! Please check your connection.";
   static const String error400 = "Bad Request!";
   static const String error401 = "Unauthorized!";
   static const String error403 = "Forbidden!";
   static const String error404 = "Page Not Found!";
   static const String error422 = "Unprocessable entity!";
-  static const String error500 = "Server Error!";
+  static const String error500 = "Server Error! Try again after sometime.";
   static const String somethingWentWrong = "Something went wrong!";
   static const String badResponse = "Bad response format!";
 

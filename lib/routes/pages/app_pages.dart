@@ -1,4 +1,5 @@
 import 'package:dokan_app/modules/auth/auth.dart';
+import 'package:dokan_app/modules/home/home.dart';
 import 'package:dokan_app/modules/splash/splash.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +30,12 @@ class AppPages {
         name: Routes.SIGN_UP,
         page: () => const SignUpPage(),
         binding: SingUnBinding()
+    ),
+
+    ///HOME
+    GetPage(
+        name: Routes.HOME,
+        page: () => const HomePage(),
     ),
   ];
 }

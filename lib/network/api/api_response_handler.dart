@@ -1,14 +1,15 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dokan_app/models/models.dart';
 import 'package:dokan_app/network/network.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
-import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class ApiResponseHandler {
-  final Response _response;
-  final Function(Response) _successCallback;
+  final http.Response _response;
+  final Function(http.Response) _successCallback;
 
-  ApiResponseHandler(this._response, {Function(Response)? successCallback})
+  ApiResponseHandler(this._response, {Function(http.Response)? successCallback})
       : _successCallback = successCallback ?? _handleSuccess;
 
   Future<ResponseModel> handleResponse() async{
@@ -26,7 +27,7 @@ class ApiResponseHandler {
         case 403:
         case 404:
         case 422:
-          responseModel = _handleClientError(_response.statusCode!);
+          responseModel = _handleClientError(_response.statusCode);
           break;
         case 500:
           responseModel = _handleServerError();
@@ -41,7 +42,7 @@ class ApiResponseHandler {
     return responseModel;
   }
 
-  static ResponseModel _handleSuccess(Response response) {
+  static ResponseModel _handleSuccess(http.Response response) {
     var responseJson = json.decode(response.body);
     var msg = responseJson['message'];
     return ResponseModel(true, msg);
@@ -70,7 +71,6 @@ class ApiResponseHandler {
         break;
     }
 
-
     if (_response.body.isNotEmpty) {
       var responseJson = _response.body;
       if (json.decode(responseJson)['message'] != null) {
@@ -82,14 +82,7 @@ class ApiResponseHandler {
   }
 
   ResponseModel _handleServerError() {
-    String errorMsg = Strings.error500;
-    if (_response.body.isNotEmpty) {
-      var responseJson = _response.body;
-      if (json.decode(responseJson)['message'] != null) {
-        errorMsg = json.decode(responseJson)['message'];
-      }
-    }
-    return ResponseModel(false, errorMsg);
+    return ResponseModel(false, Strings.error500);
   }
 
   ResponseModel _handleNetworkError() {

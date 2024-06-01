@@ -1,21 +1,23 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:dokan_app/utils/constants/constants.dart';
+import 'dart:developer';
+import 'package:dokan_app/storage/controller/storage_controller.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import '../network.dart';
 
 class ApiClient {
   final String baseUrl;
   late Map<String, String> _mainHeaders;
 
   ApiClient({required this.baseUrl}) {
+    final savedToken = Get.find<StorageController>().getUserToken();
     _mainHeaders = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'Content-Type':'application/json',
+      'Authorization': savedToken.isNotEmpty ? 'Bearer $savedToken' : '',
     };
   }
 
   Future<http.Response> getRequest(String uri, {Map<String, String>? headers}) async {
+
 
     try {
       final response = await http.get(
@@ -28,13 +30,12 @@ class ApiClient {
     }
   }
 
-  Future<http.Response> postRequest ({required String apiEndpoint, Map<String, String>? headers, Map<String, dynamic>? body}) async{
-
+  Future<http.Response> postRequest (String url, { Map<String, String>? headers, Map<String, dynamic>? body}) async{
     try {
       final response = await http.post(
-        Uri.parse(baseUrl + apiEndpoint),
+        Uri.parse(baseUrl + url),
         headers: headers ?? _mainHeaders,
-        body: body
+        body: jsonEncode(body)
       ).timeout(const Duration(seconds: 30));
       return response;
     } catch (e) {
@@ -43,12 +44,12 @@ class ApiClient {
 
   }
 
-  Future<http.Response> putRequest ({required String apiEndpoint, Map<String, String>? headers, Map<String, dynamic>? body}) async{
+  Future<http.Response> putRequest (String url, {Map<String, String>? headers, Map<String, dynamic>? body}) async{
     try {
       final response = await http.put(
-          Uri.parse(baseUrl + apiEndpoint),
+          Uri.parse(baseUrl + url),
           headers: headers ?? _mainHeaders,
-          body: body
+          body: jsonEncode(body)
       ).timeout(const Duration(seconds: 30));
       return response;
     } catch (e) {
@@ -56,12 +57,12 @@ class ApiClient {
     }
   }
 
-  Future<http.Response> patchRequest ({required String apiEndpoint, Map<String, String>? headers, Map<String, dynamic>? body}) async{
+  Future<http.Response> patchRequest (String url, {Map<String, String>? headers, Map<String, dynamic>? body}) async{
     try {
       final response = await http.patch(
-          Uri.parse(baseUrl + apiEndpoint),
+          Uri.parse(baseUrl + url),
           headers: headers ?? _mainHeaders,
-          body: body
+          body: jsonEncode(body)
       ).timeout(const Duration(seconds: 30));
       return response;
     } catch (e) {
