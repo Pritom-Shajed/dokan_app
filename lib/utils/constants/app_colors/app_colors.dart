@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
   static Color secondaryAppColor = hexToColor('#FF679B');
   static Color secondaryDarkAppColor = hexToColor('#2F2E2E');
   static Color buttonStroke = hexToColor('#D2DBE0');
+  static Color dividerColor = hexToColor('#D2DBE0');
   static Color lightGray = hexToColor('#F6F6F6');
   static Color white = Colors.white;
   static Color blue = Colors.blue;

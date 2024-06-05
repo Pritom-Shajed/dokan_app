@@ -18,7 +18,12 @@
 
    static String filter = 'assets/icons/svg/filter.svg';
    static String menu = 'assets/icons/svg/menu.svg';
+
    static String arrowDown = 'assets/icons/svg/arrow_down.svg';
+   static String arrowRight = 'assets/icons/svg/arrow_right.svg';
+
+   static String bell = 'assets/icons/svg/bell.svg';
+   static String heart = 'assets/icons/svg/heart.svg';
 
    static String star = 'assets/icons/svg/star.svg';
    static String starFilled = 'assets/icons/svg/star_filled.svg';
