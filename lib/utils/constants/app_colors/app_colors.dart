@@ -13,10 +13,14 @@ import 'package:flutter/material.dart';
   static Color darkScaffoldBackgroundColor = hexToColor('#2F2E2E');
   static Color secondaryAppColor = hexToColor('#FF679B');
   static Color secondaryDarkAppColor = hexToColor('#2F2E2E');
+  static Color buttonStroke = hexToColor('#D2DBE0');
   static Color lightGray = hexToColor('#F6F6F6');
   static Color white = Colors.white;
   static Color blue = Colors.blue;
-  static Color shadowColor = Colors.grey.withOpacity(.2);
+  static Color pink = hexToColor('#FF708A');
+  static Color green = hexToColor('#1ABC9C');
+  static Color shadowColor = Colors.grey.withOpacity(.3);
+  
 
   static Gradient gradiantColor = LinearGradient(colors: [
     hexToColor('#F2709C'),

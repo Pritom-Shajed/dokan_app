@@ -10,6 +10,29 @@ class AppButtons {
     return IconButton(onPressed: onTap, icon: Icon(icon, color: color ?? AppColors.white, size: size ?? 24.h,));
   }
 
+  static Widget checkBox ({required bool value, ValueChanged<bool?>? onChanged}){
+    return Container(
+      margin: REdgeInsets.only(right: 8),
+      child: SizedBox(
+        width: 24.h,
+        height: 24.h,
+        child: Checkbox(
+          fillColor: MaterialStateProperty.resolveWith((states) {
+            if (!states.contains(MaterialState.selected)) {
+              return Colors.white;
+            }
+            return null;
+          }),
+          side: BorderSide(color: AppColors.pink, width: 2),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.radius6)),
+          activeColor: AppColors.pink,
+          value: value,
+          onChanged: onChanged,
+        ),
+      ),
+    );
+  }
+
   static Widget svgIconButton ({double? size, VoidCallback? onTap, required String iconPath, Color? color}){
     return GestureDetector(
         onTap: onTap,
@@ -35,7 +58,7 @@ class AppButtons {
     return GestureDetector(onTap: onTap,child: AppTexts.smallText(text: text, fontSize: fontSize, fontWeight: fontWeight, color: color ?? AppColors.primaryColor));
   }
 
-  static Widget buttonWithBg ({VoidCallback? onTap, required String text, Color? textColor, Color? bgColor}){
+  static Widget buttonWithBg ({VoidCallback? onTap, required String text, Color strokeColor = Colors.transparent, Color? textColor, Color? bgColor}){
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -43,6 +66,7 @@ class AppButtons {
         width: double.maxFinite,
         padding: REdgeInsets.all(20),
         decoration: BoxDecoration(
+          border: Border.all(color: strokeColor),
             color: bgColor ?? AppColors.primaryColor,
             borderRadius: BorderRadius.circular(Dimensions.radius10)
         ),

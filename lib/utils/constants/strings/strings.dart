@@ -2,8 +2,9 @@ abstract class Strings {
 
   static const String appName = 'Dokan';
   static const String welcome = 'Welcome to Dokan!';
-  static const String comingSoon = 'Coming Soon!';
+  static const String notAvailable = 'Not available!';
   static const String homeMessage = 'Only products and profile is available!';
+  static const String filterMessage = 'Only filter is available!';
   static const String exitApp = 'Press back again to exit';
   static const String loading = "Loading, please wait";
 

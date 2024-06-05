@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
             return false;
           },
           child: Obx(() => PageStorage(bucket: pageBucket, child: controller.currentScreen))),
-      floatingActionButton: FloatingActionButton(onPressed: () {}, backgroundColor: AppColors.primaryColor, child: AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.search),),
+      floatingActionButton: FloatingActionButton(onPressed: () => AppToasts.shortToast(Strings.notAvailable, gravity: ToastGravity.CENTER), backgroundColor: AppColors.primaryColor, child: AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.search),),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(() => HomeWidgets.bottomNavBar(
           isProductsTapped: controller.isProductsTapped,

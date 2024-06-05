@@ -1,1 +1,2 @@
-export 'global_models/response_model.dart';
+export 'response/response_model.dart';
+export 'product/product_model.dart';

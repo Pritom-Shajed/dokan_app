@@ -30,32 +30,5 @@ class HomeWidgets {
     );
   }
 
-  static Widget fiterBar ({VoidCallback? onTapFilter, VoidCallback? onTapSort, VoidCallback? onTapMenu}){
-    return Container(
-      padding: REdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(Dimensions.radius10),
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(1, 3),
-                blurRadius: 2,
-                spreadRadius: 0,
-                color: AppColors.shadowColor),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppButtons.svgIconButtonWithText(onTap: onTapFilter, text: 'Filter', iconPath: AppSvgIcons.filter, color: AppColors.extraLightFontColor),
-          Row(
-            children: [
-              AppButtons.svgIconButtonWithText(onTap: onTapSort, text: 'Sort by', iconPath: AppSvgIcons.arrowDown, isIconAtRight: true, color: AppColors.extraLightFontColor),
-              16.horizontalSpace,
-              AppButtons.svgIconButton(onTap: onTapMenu, iconPath: AppSvgIcons.menu, size: Dimensions.radius14)
-            ],
-          )
-        ],
-      ),
-    );
-  }
+
 }

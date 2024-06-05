@@ -18,9 +18,9 @@ class AuthWidgets {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppButtons.socialMediaButton(onTap: onTapGoogle ?? () => AppToasts.shortToast(Strings.comingSoon),svgIconPath: AppSvgIcons.facebook),
+            AppButtons.socialMediaButton(onTap: onTapGoogle ?? () => AppToasts.shortToast(Strings.notAvailable),svgIconPath: AppSvgIcons.facebook),
             12.horizontalSpace,
-            AppButtons.socialMediaButton(onTap: onTapFacebook ?? () => AppToasts.shortToast(Strings.comingSoon),svgIconPath: AppSvgIcons.google),
+            AppButtons.socialMediaButton(onTap: onTapFacebook ?? () => AppToasts.shortToast(Strings.notAvailable),svgIconPath: AppSvgIcons.google),
           ],
         ),
 

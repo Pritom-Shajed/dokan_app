@@ -69,7 +69,7 @@ class SignInPage extends StatelessWidget {
                 24.verticalSpace,
                 Align(
                     alignment: Alignment.centerRight,
-                    child: AppButtons.textButton(onTap: ()=> AppToasts.shortToast(Strings.comingSoon),text: 'Forget password?', color: AppColors.extraLightFontColor)),
+                    child: AppButtons.textButton(onTap: ()=> AppToasts.shortToast(Strings.notAvailable),text: 'Forget password?', color: AppColors.extraLightFontColor)),
 
                 52.verticalSpace,
 
@@ -90,7 +90,7 @@ class SignInPage extends StatelessWidget {
                         });
                       }
                     },
-                    navigateToSignUp: () => Get.offAllNamed(Routes.HOME))
+                    navigateToSignUp: () => Get.offAllNamed(Routes.SIGN_UP))
               ],
             ),
           ),

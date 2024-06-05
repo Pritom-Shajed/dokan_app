@@ -32,6 +32,8 @@ dev_dependencies:
   connectivity_plus: ^6.0.3
   image_picker: ^1.1.2
   loader_overlay: ^4.0.0
+  cached_network_image: ^3.3.1
+  flutter_pannable_rating_bar: ^2.7.2+1
 
 flutter_native_splash:
   android: true
@@ -58,6 +60,7 @@ flutter:
   assets:
     - assets/icons/svg/
     - assets/icons/png/
+    - assets/json/
     - .env.development
     - .env.production
 

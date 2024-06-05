@@ -1,0 +1,1 @@
+enum FilterProduct {priceLowToHigh, priceHighToLow, rating, none}

@@ -1,4 +1,7 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/utils/constants/app_icons/app_icons.dart';
+import 'package:dokan_app/utils/constants/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class AppErrorWidget extends StatelessWidget {
@@ -13,8 +16,18 @@ class AppErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: AppTexts.smallText(
-          text: message,
+        child: Padding(
+          padding: REdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.appLogo, size: Dimensions.radius36),
+              24.verticalSpace,
+              AppTexts.smallText(
+                text: message,
+              ),
+            ],
+          ),
         ),
       ),
     );
