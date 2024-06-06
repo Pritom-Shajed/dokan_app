@@ -8,6 +8,8 @@ abstract class Strings {
   static const String exitApp = 'Press back again to exit';
   static const String loading = "Loading, please wait";
 
+  static const String errorFetchingData = 'Error while fetching data! Try again after sometime.';
+  static const String noProductsFound = 'No products found!';
   static const String unknownError = 'Unknown Error! Try again after sometime.';
   static const String noInternet = "No Internet! Please check your connection.";
   static const String error400 = "Bad Request!";

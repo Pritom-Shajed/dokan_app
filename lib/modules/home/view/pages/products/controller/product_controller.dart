@@ -12,11 +12,6 @@ class ProductController extends GetxController {
 
   ProductController({required ProductRepository productRepo}) : _productRepo = productRepo;
 
-  @override
-  void onInit() {
-    loadProducts();
-    super.onInit();
-  }
 
   /// LOADING INITIAL PRODUCTS
   final _isLoading = false.obs;
@@ -59,13 +54,13 @@ class ProductController extends GetxController {
 
   filterProducts (){
     if(selectedFilter == FilterProduct.priceLowToHigh){
-      products.sort((a,b) => double.parse(a.price ?? '0.00').compareTo(double.parse(b.price ?? '0.00')));
+      products.sort((a,b) => double.parse(a.price).compareTo(double.parse(b.price)));
     }
     if(selectedFilter == FilterProduct.priceHighToLow){
-      products.sort((a,b) => double.parse(b.price ?? '0.00').compareTo(double.parse(a.price ?? '0.00')));
+      products.sort((a,b) => double.parse(b.price).compareTo(double.parse(a.price)));
     }
     if(selectedFilter == FilterProduct.rating){
-      products.sort((a,b) => (b.averageRating ?? 0.00).compareTo(a.averageRating ?? 0.00));
+      products.sort((a,b) => (b.averageRating).compareTo(a.averageRating));
     }
     if(selectedFilter == FilterProduct.none){
       loadProducts();

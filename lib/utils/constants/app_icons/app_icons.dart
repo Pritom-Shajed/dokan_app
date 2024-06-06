@@ -24,6 +24,7 @@
 
    static String bell = 'assets/icons/svg/bell.svg';
    static String heart = 'assets/icons/svg/heart.svg';
+   static String logout = 'assets/icons/svg/logout.svg';
 
    static String star = 'assets/icons/svg/star.svg';
    static String starFilled = 'assets/icons/svg/star_filled.svg';

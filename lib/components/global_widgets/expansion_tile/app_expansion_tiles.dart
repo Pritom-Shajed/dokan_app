@@ -1,6 +1,9 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/routes/routes.dart';
+import 'package:dokan_app/storage/controller/storage_controller.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppExpansionTiles {
@@ -16,12 +19,19 @@ class AppExpansionTiles {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             GestureDetector(
-              onTap: ()=>setState(() => isExpanded = !isExpanded),
+              onTap: (){
+                if(isLast){
+                  Get.find<StorageController>().clearData();
+                  Get.offAllNamed(Routes.SIGN_IN);
+                } else {
+                  setState(() => isExpanded = !isExpanded);
+                }
+              },
               child:  Container(
                 margin: REdgeInsets.symmetric(vertical: 20),
                 child: Row(
                   children: [
-                    AppIconWidgets.svgAssetIcon(iconPath: iconSvgPath),
+                    AppIconWidgets.svgAssetIcon(iconPath: iconSvgPath, size: Dimensions.radius26, color: AppColors.greyColor),
                     10.horizontalSpace,
                     Expanded(child: AppTexts.largeText(text: title)),
                     AppIconWidgets.svgAssetIcon(iconPath: isExpanded ? AppSvgIcons.arrowDown : AppSvgIcons.arrowRight)
@@ -37,7 +47,7 @@ class AppExpansionTiles {
             ),
 
             isExpanded ? 12.verticalSpace : 0.verticalSpace,
-            Divider(color: AppColors.dividerColor,)
+            !isLast ? Divider(color: AppColors.dividerColor,) : const SizedBox.shrink(),
           ],
         ),
       );

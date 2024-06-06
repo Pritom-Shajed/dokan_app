@@ -82,7 +82,7 @@ class SignInPage extends StatelessWidget {
                           if(response.isSuccess){
                             context.hideLoaderOverlay;
                             AppToasts.longToast(response.message);
-                            Get.to(() => HomePage());
+                            Get.offAllNamed(Routes.HOME);
                           } else {
                             context.hideLoaderOverlay;
                             AppToasts.longToast(response.message);
@@ -90,7 +90,7 @@ class SignInPage extends StatelessWidget {
                         });
                       }
                     },
-                    navigateToSignUp: () => Get.offAllNamed(Routes.SIGN_UP))
+                    navigateToSignUp: () => Get.toNamed(Routes.SIGN_UP))
               ],
             ),
           ),

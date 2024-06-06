@@ -1,12 +1,11 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
-import 'package:dokan_app/utils/constants/app_colors/app_colors.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
-import 'package:dokan_app/utils/constants/dimensions/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductsWidgets {
   ProductsWidgets._();
@@ -42,7 +41,17 @@ class ProductsWidgets {
                         fit: BoxFit.cover,),
                   ),
                 ),
-            placeholder: (context, url) => AppSkeletons.skeletonContainer(),
+            placeholder: (context, url) => Skeletonizer(
+              enabled: true,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top:Radius.circular(Dimensions.radius10)),
+                  image: DecorationImage(
+                    image: AssetImage(AppPngIcons.placeHolder),
+                    fit: BoxFit.cover,),
+                ),
+              ),
+            ),
             errorWidget: (context, url, error)
             =>  Container(
               decoration: BoxDecoration(

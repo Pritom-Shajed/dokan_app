@@ -1,6 +1,7 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppButtons {
@@ -72,6 +73,16 @@ class AppButtons {
         ),
         child: AppTexts.largeText(text: text, color: textColor ?? AppColors.white),
       ),
+    );
+  }
+
+  static Widget saveAndCancelButton ({String cancelText = 'Cancel', String saveText = 'Save', VoidCallback? onTapCancel, VoidCallback? onTapSave}){
+    return  Row(
+      children: [
+        Expanded(child: AppButtons.buttonWithBg(text: 'Cancel', strokeColor: AppColors.stokeColor, onTap: onTapCancel ?? () => Get.back(), textColor: AppColors.extraLightFontColor, bgColor: AppColors.white)),
+        10.horizontalSpace,
+        Expanded(child: AppButtons.buttonWithBg(text: 'Save', onTap: onTapSave ?? () => Get.back(), bgColor: AppColors.green)),
+      ],
     );
   }
 

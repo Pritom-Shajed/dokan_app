@@ -18,7 +18,8 @@ class ProfileOptions {
     ProfileOptions(AppSvgIcons.user, 'Account', false),
     ProfileOptions(AppSvgIcons.pass, 'Password', false),
     ProfileOptions(AppSvgIcons.bell, 'Notification', false),
-    ProfileOptions(AppSvgIcons.heart, 'Wishlist', true),
+    ProfileOptions(AppSvgIcons.heart, 'Wishlist', false),
+    ProfileOptions(AppSvgIcons.logout, 'Logout', true),
   ];
 
 }

@@ -140,16 +140,12 @@ class AppBottomSheets {
                 ],
               ),
               40.verticalSpace,
-              Row(
-                children: [
-                  Expanded(child: AppButtons.buttonWithBg(text: 'Cancel', strokeColor: AppColors.buttonStroke, onTap: onTapCancel ?? () => Get.back(), textColor: AppColors.extraLightFontColor, bgColor: AppColors.white)),
-                  10.horizontalSpace,
-                  Expanded(child: AppButtons.buttonWithBg(text: 'Apply', onTap: (){
-                    Get.back();
-                    onTapApply?.call();
-                  }, bgColor: AppColors.green)),
-                ],
-              )
+                  AppButtons.saveAndCancelButton(
+                      saveText: 'Apply',
+                      onTapSave: () {
+                        Get.back();
+                        onTapApply?.call();
+                      }),
             ],
           ),
         ));

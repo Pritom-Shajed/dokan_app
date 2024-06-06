@@ -60,6 +60,7 @@ class SignInController extends GetxController {
          var responseBody = json.decode(response.body);
 
          Get.find<StorageController>().saveUserToken(token: responseBody['token']);
+         Get.find<StorageController>().saveUserEmail(email: emailController.text.trim());
 
         return ResponseModel(true, Strings.welcome);
       },

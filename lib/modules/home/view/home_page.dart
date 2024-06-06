@@ -1,7 +1,5 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
-import 'package:dokan_app/modules/home/controller/home_controller.dart';
 import 'package:dokan_app/modules/home/home.dart';
-import 'package:dokan_app/utils/constants/app_icons/app_icons.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

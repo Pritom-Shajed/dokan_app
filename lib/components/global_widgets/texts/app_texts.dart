@@ -21,23 +21,23 @@ abstract class AppTexts {
     );
   }
 
-  static Widget extraLargeText ({int? maxLine, TextOverflow? overflow,required String text, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
-    return Text(text, maxLines: maxLine, overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize26, fontWeight: fontWeight),);
+  static Widget extraLargeText ({int? maxLine, TextAlign? textAlign, TextOverflow? overflow,required String text, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
+    return Text(text, maxLines: maxLine, textAlign: textAlign,  overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize26, fontWeight: fontWeight),);
   }
 
-  static Widget largeText ({int? maxLine, TextOverflow? overflow,required String text, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
-    return Text(text, maxLines: maxLine, overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize18, fontWeight: fontWeight),);
+  static Widget largeText ({int? maxLine, TextAlign? textAlign, TextOverflow? overflow,required String text, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
+    return Text(text, maxLines: maxLine, textAlign: textAlign, overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize18, fontWeight: fontWeight),);
   }
 
-  static Widget mediumText ({int? maxLine, TextOverflow? overflow, required String text, Color? color, double? fontSize, TextDecoration? textDecoration, FontWeight? fontWeight}){
-    return Text(text, maxLines: maxLine, overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize14, fontWeight: fontWeight ),);
+  static Widget mediumText ({int? maxLine, TextAlign? textAlign, TextOverflow? overflow, required String text, Color? color, double? fontSize, TextDecoration? textDecoration, FontWeight? fontWeight}){
+    return Text(text, maxLines: maxLine, textAlign: textAlign,  overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize14, fontWeight: fontWeight ),);
   }
 
-  static Widget smallText ({int? maxLine, TextOverflow? overflow,required String text, TextAlign? textAlign, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
-    return Text(text, maxLines: maxLine, overflow: overflow ?? TextOverflow.ellipsis, textAlign: textAlign, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize12, fontWeight: fontWeight),);
+  static Widget smallText ({int? maxLine, TextAlign? textAlign, TextOverflow? overflow,required String text, Color? color, double? fontSize,TextDecoration? textDecoration, FontWeight? fontWeight}){
+    return Text(text, maxLines: maxLine, textAlign: textAlign,  overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize12, fontWeight: fontWeight),);
   }
 
-  static Widget extraSmallText ({int? maxLine, TextOverflow? overflow,required String text, Color? color, double? fontSize, TextDecoration? textDecoration, FontWeight? fontWeight}){
-    return Text(text, maxLines: maxLine, overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize10, fontWeight: fontWeight),);
+  static Widget extraSmallText ({int? maxLine, TextAlign? textAlign, TextOverflow? overflow,required String text, Color? color, double? fontSize, TextDecoration? textDecoration, FontWeight? fontWeight}){
+    return Text(text, maxLines: maxLine, textAlign: textAlign,  overflow: overflow ?? TextOverflow.ellipsis, style: TextStyle(color: color ?? AppColors.baseFontColor, decoration: textDecoration, fontSize: fontSize ?? Dimensions.fontSize10, fontWeight: fontWeight),);
   }
 }

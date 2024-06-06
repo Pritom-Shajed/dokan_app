@@ -1,37 +1,61 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
 import 'package:dokan_app/models/models.dart';
-import 'package:dokan_app/utils/constants/app_icons/app_icons.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileWidgets {
   ProfileWidgets._();
 
-  static Widget profileHeader (){
+  static Widget profileHeader ({required String name, required String email, required String userImageLink}){
     return  Column(
       children: [
+
+        // AVATAR
         DottedBorder(
           borderType: BorderType.Circle,
           dashPattern: const [2, 4],
           padding: REdgeInsets.all(8),
           color: AppColors.pink,
-          child: CircleAvatar(
-            radius: Dimensions.radius70,
-            backgroundImage: AssetImage(AppPngIcons.placeHolder),
+          child: CachedNetworkImage(
+            imageUrl: userImageLink,
+            imageBuilder:
+                (context, imageProvider) =>
+                CircleAvatar(
+                  radius: Dimensions.radius70,
+                  backgroundColor: AppColors.greyColor.withOpacity(0.2),
+                  backgroundImage: imageProvider,
+                ),
+            placeholder: (context, url) => Skeletonizer(
+              enabled: true,
+              child: CircleAvatar(
+                radius: Dimensions.radius70,
+                backgroundColor: AppColors.greyColor.withOpacity(0.2),
+                backgroundImage: NetworkImage(AppPngIcons.placeHolder),
+              ),
+            ),
+            errorWidget: (context, url, error)
+            =>  CircleAvatar(
+              radius: Dimensions.radius70,
+              backgroundColor: AppColors.greyColor.withOpacity(0.2),
+              backgroundImage: AssetImage(AppPngIcons.placeHolder),
+            ),
           ),
         ),
 
         60.verticalSpace,
 
-        AppTexts.extraLargeText(text: 'Pritom', fontWeight: FontWeight.bold),
-        AppTexts.mediumText(text: 'info@johnsmith.com', color: AppColors.lightFontColor),
+        // NAME AND EMAIL
+        AppTexts.extraLargeText(text: name, fontWeight: FontWeight.bold),
+        AppTexts.mediumText(text: email, color: AppColors.lightFontColor),
       ],
     );
   }
 
-  static Widget options (){
+  static Widget options (BuildContext context, {TextEditingController? emailController, TextEditingController? nameController, TextEditingController? passController, VoidCallback? onTapEmailSave, VoidCallback? onTapPassSave}){
     return Container(
       decoration: BoxDecoration(
           color: AppColors.white,
@@ -50,7 +74,21 @@ class ProfileWidgets {
           return AppExpansionTiles.expansionTile(
               iconSvgPath: option.iconSvgPath,
               title: option.title,
-              expandedContent: index != 0 ? AppTexts.mediumText(text: Strings.notAvailable) : AppTexts.mediumText(text: 'Account'));
+              isLast: option.isLast,
+              expandedContent: index == 0 ? Column(
+                children: [
+                  AppTextFields.textFieldWithTitle(context, title: 'Email', controller: emailController),
+                  AppTextFields.textFieldWithTitle(context, title: 'Name', controller: nameController),
+                  6.verticalSpace,
+                  AppButtons.buttonWithBg(text: 'Save', onTap: onTapEmailSave),
+                ],
+              ) : index == 1 ? Column(
+                children: [
+                  AppTextFields.textFieldWithTitle(context, title: 'Password', controller: passController, obscureText: true),
+                  6.verticalSpace,
+                  AppButtons.buttonWithBg(text: 'Save', onTap: onTapPassSave),
+                ],
+              ) : AppTexts.mediumText(text: Strings.notAvailable));
         }),
       ),
     );

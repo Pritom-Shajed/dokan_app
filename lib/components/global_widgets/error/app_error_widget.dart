@@ -24,6 +24,8 @@ class AppErrorWidget extends StatelessWidget {
               AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.appLogo, size: Dimensions.radius36),
               24.verticalSpace,
               AppTexts.smallText(
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
                 text: message,
               ),
             ],

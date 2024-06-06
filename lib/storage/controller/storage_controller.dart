@@ -11,6 +11,14 @@ class StorageController extends GetxController {
     await _storageRepo.saveUserToken(token: token);
   }
 
+  Future<void> saveUserEmail ({required String email}) async{
+    await _storageRepo.saveUserEmail(email: email);
+  }
+
+  String getUserEmail () {
+    return  _storageRepo.getUserEmail();
+  }
+
   String getUserToken () {
     return  _storageRepo.getUserToken();
   }

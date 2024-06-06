@@ -37,6 +37,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
   static final double radius18 = 18.r;
   static final double radius20 = 20.r;
   static final double radius24 = 24.r;
+  static final double radius26 = 26.r;
   static final double radius30 = 30.r;
   static final double radius36 = 36.r;
   static final double radius44 = 44.r;
