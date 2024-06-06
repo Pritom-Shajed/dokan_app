@@ -1,4 +1,5 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/helper/extensions/build_context_extensions.dart';
 import 'package:dokan_app/modules/home/home.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +36,9 @@ class HomePage extends StatelessWidget {
             return false;
           },
           child: Obx(() => PageStorage(bucket: pageBucket, child: controller.currentScreen))),
-      floatingActionButton: FloatingActionButton(onPressed: () => AppToasts.shortToast(Strings.notAvailable, gravity: ToastGravity.CENTER), backgroundColor: AppColors.primaryColor, child: AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.search),),
+      floatingActionButton: Visibility(
+          visible: context.viewInsetsBottom == 0.0,
+          child: FloatingActionButton(onPressed: () => AppToasts.shortToast(Strings.notAvailable, gravity: ToastGravity.CENTER), backgroundColor: AppColors.primaryColor, child: AppIconWidgets.svgAssetIcon(iconPath: AppSvgIcons.search),)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(() => HomeWidgets.bottomNavBar(
           isProductsTapped: controller.isProductsTapped,

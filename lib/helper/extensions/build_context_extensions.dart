@@ -19,6 +19,8 @@ extension BuildContextExtension on BuildContext {
   Size get screenSize => MediaQuery.of(this).size;
 
   double get screenRatio => MediaQuery.of(this).size.aspectRatio;
+
+  double get viewInsetsBottom => MediaQuery.of(this).viewInsets.bottom;
 }
 
 Widget _overlayLoader (){

@@ -96,6 +96,7 @@ class SignUpPage extends StatelessWidget {
                 AuthWidgets.footer(
                     isSignInPage: false,
                     onTapLoginOrSignUp: (){
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if(controller.formKey.currentState!.validate()){
                         context.showLoaderOverlay;
                         controller.signUp().then((response){

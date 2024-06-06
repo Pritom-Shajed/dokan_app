@@ -1,10 +1,9 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
 import 'package:dokan_app/helper/extensions/build_context_extensions.dart';
 import 'package:dokan_app/modules/auth/auth.dart';
-import 'package:dokan_app/modules/home/view/home_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dokan_app/routes/pages/app_pages.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
-import 'package:dokan_app/utils/constants/regex/app_regex.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -76,12 +75,13 @@ class SignInPage extends StatelessWidget {
                 AuthWidgets.footer(
                     isSignInPage: true,
                     onTapLoginOrSignUp: (){
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if(controller.formKey.currentState!.validate()){
                         context.showLoaderOverlay;
                         controller.signIn().then((response){
                           if(response.isSuccess){
                             context.hideLoaderOverlay;
-                            AppToasts.longToast(response.message);
+                            AppToasts.shortToast(response.message, gravity: ToastGravity.CENTER);
                             Get.offAllNamed(Routes.HOME);
                           } else {
                             context.hideLoaderOverlay;

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
 import 'package:dokan_app/helper/helper.dart';
 import 'package:flutter/services.dart';
@@ -37,11 +38,16 @@ abstract class Initializer {
   static Future<void> _initServices() async {
     try {
 
+      _initScreenPreference();
+
+      _initHttp();
+
       await _initStorage();
+
       await _loadEnv();
+
       await _dependencyInjection();
 
-      _initScreenPreference();
     } catch (err) {
       rethrow;
     }
@@ -50,6 +56,10 @@ abstract class Initializer {
   static Future<void> _initStorage() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     Get.put(sharedPreferences, permanent: true);
+  }
+
+  static void _initHttp (){
+    HttpOverrides.global = MyHttpOverrides();
   }
 
   static Future<void> _loadEnv () async {
@@ -66,5 +76,14 @@ abstract class Initializer {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

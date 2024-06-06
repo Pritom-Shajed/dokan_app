@@ -1,4 +1,5 @@
 import 'package:dokan_app/components/global_widgets/global_widgets.dart';
+import 'package:dokan_app/helper/helper.dart';
 import 'package:dokan_app/modules/home/home.dart';
 import 'package:dokan_app/storage/storage.dart';
 import 'package:dokan_app/utils/constants/constants.dart';
@@ -57,11 +58,46 @@ class _ProfilePageState extends State<ProfilePage> {
                       60.verticalSpace,
                           ProfileWidgets.options(
                             context,
+                            formKeyEmailName: _controller.formKeyEmailName,
+                            formKeyPass: _controller.formKeyPass,
                             emailController: _controller.emailController,
                             nameController: _controller.nameController,
                             passController: _controller.passController,
-                            onTapEmailSave: () {},
-                            onTapPassSave: () {},
+                            onTapEmailSave: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              if(_controller.formKeyEmailName.currentState!.validate()){
+                                context.showLoaderOverlay;
+                                _controller.updateEmailAndName(userId: _controller.userInfo?.id ?? 0).then((response){
+                                  if(response.isSuccess){
+                                    _controller.fetchUserInfo();
+                                    context.hideLoaderOverlay;
+                                    AppToasts.longToast(response.message);
+                                  } else {
+                                    context.hideLoaderOverlay;
+                                    AppToasts.longToast(response.message);
+                                  }
+
+                                });
+                              }
+                            },
+                            onTapPassSave: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              if(_controller.formKeyPass.currentState!.validate()){
+                                context.showLoaderOverlay;
+                                _controller.updatePass(userId: _controller.userInfo?.id ?? 0).then((response){
+                                  if(response.isSuccess){
+                                    _controller.fetchUserInfo();
+                                    context.hideLoaderOverlay;
+                                    AppToasts.longToast(response.message);
+                                  } else {
+                                    context.hideLoaderOverlay;
+                                    AppToasts.longToast(response.message);
+                                  }
+
+                                });
+                              }
+
+                            }
                           ),
                         ],
                   ),

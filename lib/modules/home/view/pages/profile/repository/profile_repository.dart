@@ -13,4 +13,8 @@ class ProfileRepository {
   Future<http.Response> fetchUserInfo() async {
     return await _apiClient.getRequest(ApiEndpoints.userInfo);
   }
+
+  Future<http.Response> updateUserInfo({required int userId, required Map<String, dynamic> body}) async {
+    return await _apiClient.postRequest(ApiEndpoints.updateUser(userId: userId), body: body);
+  }
 }

@@ -3,6 +3,7 @@ import 'package:dokan_app/models/models.dart';
 import 'package:dokan_app/modules/home/home.dart';
 import 'package:dokan_app/modules/home/view/pages/profile/profile.dart';
 import 'package:dokan_app/network/api/api.dart';
+import 'package:dokan_app/storage/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,10 +15,12 @@ class ProfileController extends GetxController {
   late TextEditingController emailController;
   late TextEditingController nameController;
   late TextEditingController passController;
+  final GlobalKey<FormState> formKeyEmailName = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKeyPass = GlobalKey<FormState>();
 
   @override
   void onInit() {
-    emailController = TextEditingController();
+    emailController = TextEditingController(text: Get.find<StorageController>().getUserEmail());
     nameController = TextEditingController();
     passController = TextEditingController();
     super.onInit();
@@ -31,12 +34,14 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
-  /// LOADING USER INFO
+  /// API CALLING
   final _isLoading = false.obs;
 
   bool get isLoading => _isLoading.value;
 
   set isLoading(value) => _isLoading.value = value;
+
+  /// LOADING USER INFO
 
   final _userInfo = Rxn<UserInfo>();
 
@@ -57,6 +62,8 @@ class ProfileController extends GetxController {
 
         userInfo = UserInfo.fromJson(responseBody);
 
+        nameController.text = userInfo?.name ?? '';
+
 
         return ResponseModel(true, 'Successfully fetched');
       },
@@ -65,6 +72,52 @@ class ProfileController extends GetxController {
       return apiResponseHandler.handleResponse();
     } catch (e){
       isLoading = false;
+      return ResponseModel(false, e.toString());
+    }
+  }
+
+  /// UPDATING USER INFO
+
+  Future<ResponseModel> updateEmailAndName ({required int userId}) async{
+
+    try {
+      final response = await _profileRepo.updateUserInfo(userId: userId, body: {
+        "email": emailController.text.trim(),
+        "name": nameController.text.trim()
+      });
+
+
+      final apiResponseHandler = ApiResponseHandler(
+        response, successCallback: (response) {
+
+        Get.find<StorageController>().saveUserEmail(email: emailController.text.trim());
+
+        return ResponseModel(true, 'Successfully updated');
+      },
+      );
+      return apiResponseHandler.handleResponse();
+    } catch (e){
+      return ResponseModel(false, e.toString());
+    }
+  }
+
+  Future<ResponseModel> updatePass ({required int userId}) async{
+
+    try {
+      final response = await _profileRepo.updateUserInfo(userId: userId, body: {
+        "password": passController.text.trim(),
+      });
+
+
+      final apiResponseHandler = ApiResponseHandler(
+        response, successCallback: (response) {
+          passController.clear();
+
+        return ResponseModel(true, 'Successfully updated');
+      },
+      );
+      return apiResponseHandler.handleResponse();
+    } catch (e){
       return ResponseModel(false, e.toString());
     }
   }

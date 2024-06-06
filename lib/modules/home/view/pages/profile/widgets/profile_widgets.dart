@@ -55,7 +55,7 @@ class ProfileWidgets {
     );
   }
 
-  static Widget options (BuildContext context, {TextEditingController? emailController, TextEditingController? nameController, TextEditingController? passController, VoidCallback? onTapEmailSave, VoidCallback? onTapPassSave}){
+  static Widget options (BuildContext context, {GlobalKey<FormState>? formKeyEmailName, GlobalKey<FormState>? formKeyPass,TextEditingController? emailController, TextEditingController? nameController, TextEditingController? passController, VoidCallback? onTapEmailSave, VoidCallback? onTapPassSave}){
     return Container(
       decoration: BoxDecoration(
           color: AppColors.white,
@@ -75,19 +75,48 @@ class ProfileWidgets {
               iconSvgPath: option.iconSvgPath,
               title: option.title,
               isLast: option.isLast,
-              expandedContent: index == 0 ? Column(
-                children: [
-                  AppTextFields.textFieldWithTitle(context, title: 'Email', controller: emailController),
-                  AppTextFields.textFieldWithTitle(context, title: 'Name', controller: nameController),
-                  6.verticalSpace,
-                  AppButtons.buttonWithBg(text: 'Save', onTap: onTapEmailSave),
-                ],
-              ) : index == 1 ? Column(
-                children: [
-                  AppTextFields.textFieldWithTitle(context, title: 'Password', controller: passController, obscureText: true),
-                  6.verticalSpace,
-                  AppButtons.buttonWithBg(text: 'Save', onTap: onTapPassSave),
-                ],
+              expandedContent: index == 0 ? Form(
+                key: formKeyEmailName,
+                child: Column(
+                  children: [
+                    AppTextFields.textFieldWithTitle(context, title: 'Email', controller: emailController,
+                        validator: (email){
+                          if(email == null || email.isEmpty) {
+                            return Strings.emptyTextField;
+                          } else if(!AppRegex.isEmailValid(email)){
+                            return Strings.emailNotValid;
+                          }
+                          return null;
+                        }
+                    ),
+                    AppTextFields.textFieldWithTitle(context, title: 'Name', controller: nameController,
+                        validator: (name){
+                          if(name == null || name.isEmpty) {
+                            return Strings.emptyTextField;
+                          }
+                          return null;
+                        }
+                    ),
+                    6.verticalSpace,
+                    AppButtons.buttonWithBg(text: 'Save', onTap: onTapEmailSave),
+                  ],
+                ),
+              ) : index == 1 ? Form(
+                key: formKeyPass,
+                child: Column(
+                  children: [
+                    AppTextFields.textFieldWithTitle(context, title: 'Password', controller: passController, obscureText: true,
+                      validator: (pass){
+                        if(pass == null || pass.isEmpty) {
+                          return Strings.emptyTextField;
+                        }
+                        return null;
+                      }
+                    ),
+                    6.verticalSpace,
+                    AppButtons.buttonWithBg(text: 'Save', onTap: onTapPassSave),
+                  ],
+                ),
               ) : AppTexts.mediumText(text: Strings.notAvailable));
         }),
       ),
