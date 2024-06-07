@@ -1,16 +1,35 @@
-# dokan_app
+# Dokan App
 
-A new Flutter project.
+Dokan is a mobile application built using Flutter, designed to work seamlessly with the WordPress REST API. It provides users with the ability to browse and filter products, manage their account, and enjoy a smooth and intuitive user experience with a native splash screen.
 
-## Getting Started
+## Key Features
+- **Product Browsing and Filtering:** Users can browse through a variety of products and use filters to find exactly what they are looking for.
+- **User Authentication:** Users can sign up and sign in to their accounts securely.
+- **Profile Management:** Users can update their email, name, and password.
+- **Native Splash Screen:** The app features a properly implemented native splash screen for a smooth startup experience.
 
-This project is a starting point for a Flutter application.
+## Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+![App Screenshot](https://github.com/Pritom-Shajed/dokan_app/blob/master/screenshots/dokan_app.png?raw=true)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clone the repository:
+```bash
+git clone https://github.com/Pritom-Shajed/dokan_app/
+cd dokan_app
+```
+Download the .env files and paste them at project root directory:
+```bash
+https://drive.google.com/drive/folders/1_WmfbrKaQGLD1uQEGkwLebJLvF5bJZss
+```
+Install dependencies:
+```bash
+flutter pub get
+```
+Run the app:
+```bash
+flutter run --release
+```
+
+![](https://github.com/Pritom-Shajed/dokan_app/blob/master/assets/icons/png/splash_logo.png?raw=true)
