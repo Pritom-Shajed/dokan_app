@@ -28,6 +28,8 @@ abstract class Initializer {
 
       await _initServices();
 
+      await Future.delayed(const Duration(milliseconds: 150));
+
       FlutterNativeSplash.remove();
       runApp();
     }, (error, stack) {
